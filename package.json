@@ -1,0 +1,22 @@
+{
+  "name": "exws",
+  "version": "1.0.0",
+  "description": "A JavaScript library wrapped websocket for cryptocurrency trading ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cryptocurrency",
+    "websocket"
+  ],
+  "author": "yx_super",
+  "license": "ISC",
+  "dependencies": {
+    "bitmex-realtime-api": "git+https://github.com/mukedian0/BitmexWebsocket.git",
+    "debug": "^4.1.0",
+    "lodash": "^4.17.11",
+    "pako": "^1.0.7",
+    "ws": "^6.1.2"
+  }
+}
