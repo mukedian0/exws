@@ -6,7 +6,7 @@ const debug = require('debug')('gateio:ws2')
 const _ = require('lodash');
 const pako = require('pako');
 
-const WS_URL = 'wss://api.zb.cn:9999/websocket'
+const WS_URL = 'wss://api.zb.cn/websocket'
 const isSnapshot = msg => msg[0] && Array.isArray(msg[0]);
 /**
  * Communicates with v1 of the Bitfinex WebSocket API
