@@ -1,5 +1,5 @@
 # exws
-###封装了数字货币交易所的websocket
+### 封装了部分数字货币交易所的websocket
 ```
 const exws = require('exws');
 
