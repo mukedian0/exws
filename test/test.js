@@ -1,12 +1,12 @@
 const exws = require('../index');
 
-this.ws = new exws.bitmex({});
+this.ws = new exws.okex({});
 
 this.ws.on('open', ()=>{
     console.log('ws open');
-    this.ws.subscribeOrderBook('XBTCUSD');
-    this.ws.subscribeTrades('XBTCUSD');
-    this.ws.subscribeTicker('XBTCUSD');
+    this.ws.subscribeOrderBook('btc_usdt');
+    this.ws.subscribeTrades('btc_usdt');
+    this.ws.subscribeTicker('btc_usdt');
 })
 this.ws.on('close', ()=>{console.log('ws close')})
 this.ws.on('error', (error)=>{console.log('ws error')})
