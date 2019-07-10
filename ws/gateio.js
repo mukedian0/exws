@@ -226,11 +226,11 @@ class WSv1 extends EventEmitter {
         if (markets.length > 1) {
             for (let market of markets) {
                 if (market && market != "") {
-                    params.push([market, len, "0.000001"]);
+                    params.push([market, len, "0.00000001"]);
                 }
             }
         } else {
-            params = [markets[0], len, "0.000001"];
+            params = [markets[0], len, "0.00000001"];
         }
         this.sendCmd('depth.subscribe', params);
     }
