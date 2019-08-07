@@ -56,9 +56,8 @@ class WSv1 extends EventEmitter {
             debug('[okex ws3 error]  ', msgJSON)
             return
         }
-
-        console.log(msg);
-        //debug('Received message:  ', msg)
+        //debug('Received messag
+        e:  ', msg)
         this.emit('message', msg, flags);
         //debug('Emmited message event')
 
