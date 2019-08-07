@@ -329,9 +329,7 @@ class WSv1 extends EventEmitter {
             this.hb = null;
         }
         this.hb = setInterval(() => {
-            this.send({
-                event: 'ping'
-            })
+            this._ws.send('ping')
         }, 20000);
     }
 
