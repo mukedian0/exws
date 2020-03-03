@@ -1,10 +1,10 @@
 'use strict'
 const EventEmitter = require('events');
 const WebSocket = require('ws');
-const debug = require('debug')('gateio:ws2')
+const debug = require('debug')('okex:ws3')
 const pako = require('pako');
 
-const WS_URL = 'wss://real.okex.com:10442/ws/v3'
+const WS_URL = 'wss://real.okex.com:8443/ws/v3'
 const isSnapshot = msg => msg[0] && Array.isArray(msg[0]);
 /**
  * Communicates with v1 of the Bitfinex WebSocket API
