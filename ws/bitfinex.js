@@ -4,7 +4,7 @@ const EventEmitter = require('events');
 const WebSocket = require('ws');
 const debug = require('debug')('bitfinex:ws')
 
-const WS_URL = 'wss://api.bitfinex.com/ws/'
+const WS_URL = 'wss://api-pub.bitfinex.com/ws/2'
 
 const isSnapshot = msg => msg[0] && Array.isArray(msg[0]);
 /**
@@ -127,19 +127,20 @@ class WSv1 extends EventEmitter {
 
     _processTickerEvent(msg, event) {
         try {
-            if (msg.length > 9) { // Update
+            let ticker = msg[0];
+            if (ticker.length > 9) { // Update
                 // All values are numbers
                 const update = {
-                    bid: msg[0],
-                    bidSize: msg[1],
-                    ask: msg[2],
-                    askSize: msg[3],
-                    dailyChange: msg[4],
-                    dailyChangePerc: msg[5],
-                    lastPrice: msg[6],
-                    volume: msg[7],
-                    high: msg[8],
-                    low: msg[9]
+                    bid: ticker[0],
+                    bidSize: ticker[1],
+                    ask: ticker[2],
+                    askSize: ticker[3],
+                    dailyChange: ticker[4],
+                    dailyChangePerc: ticker[5],
+                    lastPrice: ticker[6],
+                    volume: ticker[7],
+                    high: ticker[8],
+                    low: ticker[9]
                 }
     
                 debug('Emitting ticker, %s, ', event.pair, update)
@@ -173,20 +174,15 @@ class WSv1 extends EventEmitter {
             if (msg[0] !== 'te') return
     
             // seq is a string, other payload members are nums
-            const update = { seq: msg[1] }
+            let trade = msg[1]
+            const update = { seq: trade[0] }
     
             if (msg[0] === 'te') { // Trade executed
-                update.timestamp = msg[2]
-                update.price = msg[3]
-                update.amount = Math.abs(msg[4])
-                update.type = msg[4] < 0 ? 'ask' : 'bid'
-            } else { // Trade updated
-                update.id = msg[2]
-                update.timestamp = msg[3]
-                update.price = msg[4]
-                update.amount = msg[5]
-                update.type = msg[5] < 0 ? 'ask' : 'bid'
-            }
+                update.timestamp = trade[1]
+                update.price = trade[3]
+                update.amount = Math.abs(trade[2])
+                update.type = trade[2] < 0 ? 'ask' : 'bid'
+            } 
     
             // See http://docs.bitfinex.com/#trades75
             //debug('Emitting trade', event.pair, update)
@@ -200,21 +196,22 @@ class WSv1 extends EventEmitter {
     _processBookEvent(msg, event) {
         try {
             // TODO: Maybe break this up into snapshot/normal handlers? Also trade event
-            if (!isSnapshot(msg[0]) && msg.length > 2) {
+            let book = msg[0]
+            if (!isSnapshot(book[0]) && book.length > 2) {
                 let depth
     
                 let update = { asks: [], bids: [] };
                 if (event.prec === 'R0') {
                     depth = {
-                        price: msg[1],
-                        orderId: msg[0],
-                        amount: msg[2]
+                        price: book[1],
+                        orderId: book[0],
+                        amount: book[2]
                     }
                 } else {
                     depth = {
-                        price: msg[0],
-                        count: msg[1],
-                        amount: msg[2]
+                        price: book[0],
+                        count: book[1],
+                        amount: book[2]
                     }
                 }
     
