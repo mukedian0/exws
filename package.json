@@ -15,7 +15,7 @@
   "dependencies": {
     "bitmex-realtime-api": "git+https://github.com/mukedian0/BitmexWebsocket.git",
     "debug": "^4.1.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "pako": "^1.0.7",
     "ws": "^6.1.2"
   }
