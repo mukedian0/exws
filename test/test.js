@@ -1,14 +1,14 @@
 const exws = require('../index');
 const HttpsProxyAgent = require('https-proxy-agent')
 
-let httpAgent = new HttpsProxyAgent('http://127.0.0.1:1087');
-this.ws = new exws.bitfinex({agent: httpAgent});
+let httpAgent = new HttpsProxyAgent('http://127.0.0.1:4780');
+this.ws = new exws.okex({agent: httpAgent});
 
 this.ws.on('open', ()=>{
     console.log('ws open');
-    this.ws.subscribeOrderBook('btcusd');
-    //this.ws.subscribeTrades('btcusd');
-    //this.ws.subscribeTicker('btcusd');
+    this.ws.subscribeOrderBook('BTC-USDT');
+    //this.ws.subscribeTrades('BTC-USDT');
+    //this.ws.subscribeTicker('BTC-USDT');
 })
 this.ws.on('close', ()=>{console.log('ws close')})
 this.ws.on('error', (error)=>{console.log('ws error', error)})

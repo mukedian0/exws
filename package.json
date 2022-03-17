@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "bitmex-realtime-api": "git+https://github.com/mukedian0/BitmexWebsocket.git",
+    "binance": "git+https://github.com/zoeyg/binance.git",
     "debug": "^4.1.0",
     "lodash": "^4.17.11",
     "pako": "^1.0.7",
